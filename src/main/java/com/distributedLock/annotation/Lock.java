@@ -19,15 +19,15 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Lock {
     /**
-     * 参数属性名称，作为锁的键
-     * @return String
-     */
-    public String fieldNameAsLockKey() default "";
-    /**
      * 参数坐标 默认为第一个参数下标值为0
      * @return LockParameterIndex
      */
     public LockParameterIndex lockParameterIndex() default LockParameterIndex.INDEX_0;
+    /**
+     * 参数属性名称，作为锁的键
+     * @return String
+     */
+    public String fieldNameAsLockKey() default "";
 	/**
 	 * 锁的存活时间默认为300s
 	 * @return long

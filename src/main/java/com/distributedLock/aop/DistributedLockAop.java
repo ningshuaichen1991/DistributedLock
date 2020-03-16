@@ -16,7 +16,6 @@ import com.distributedLock.exception.LockAnnotationException;
 import com.distributedLock.exception.LockException;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -56,13 +55,12 @@ public class DistributedLockAop {
     	logger.info("开始执行切面拦截锁的获取：{}",joinPoint.getSignature().toString());
     	String lockKey = null;
     	String requestId = distributedLock.getRequestId();
-    	String lockKeyPrefix = null;
-    	String methodName = null;
+    	String lockKeyPrefix = null;//key的前缀
+    	String methodName = null;//方法名称
     	boolean proceedStatus = false;//如果是aop拦截执行完毕则为true
         try {
         	MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         	Method method = methodSignature.getMethod();
-        	Signature signature =  joinPoint.getSignature();
         	Lock lock = method.getAnnotation(Lock.class);
 			methodName = method.getName();
 			lockKeyPrefix = (StringUtils.isEmpty(lock.lockKeyPrefix())?method.getName():lock.lockKeyPrefix());

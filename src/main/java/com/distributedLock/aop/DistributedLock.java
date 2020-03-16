@@ -24,7 +24,7 @@ public class DistributedLock {
     private StringRedisTemplate stringRedisTemplate;
 
 
-    private static String ERROR_MSG = "请您使用springBoot2.x版本";
+    private static String ERROR_MSG = "释放锁失败，请使用springBoot2.x版本";
     /**
      * LUA 表达式删除key 能保持原子性
      */
